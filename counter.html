@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue Counter Fancy</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #f4f4f9, #e0e7ff);
+    }
+
+    .counter {
+      font-size: 4rem;
+      font-weight: bold;
+      margin: 1rem;
+      transition: color 0.3s, transform 0.2s;
+    }
+
+    .counter.positive {
+      color: #4CAF50;
+    }
+
+    .counter.negative {
+      color: #F44336;
+    }
+
+    .counter.animate {
+      transform: scale(1.3);
+    }
+
+    button {
+      padding: 0.6rem 1.2rem;
+      margin: 0.3rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 10px;
+      background: #6366f1;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div 
+      class="counter" 
+      :class="[{ positive: count > 0, negative: count < 0, animate: isAnimating }]"
+    >
+      {{ count }}
+    </div>
+    <button @click="decrement">-</button>
+    <button @click="increment">+</button>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          count: 1,
+          isAnimating: false
+        }
+      },
+      methods: {
+        increment() {
+          this.count *= +2;
+          this.animate();
+        },
+        decrement() {
+          this.count = this.count -2;
+          this.animate();
+        },
+        animate() {
+          this.isAnimating = true;
+          setTimeout(() => {
+            this.isAnimating = false;
+          }, 200); // アニメーション時間に合わせる
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
