@@ -1,0 +1,9 @@
+{
+  "rules": [
+    {
+      "id": "min-contrast-ratio-text",
+      "description": "通常サイズの文字は、背景色とのコントラスト比が4.5:1以上でなければならない（WCAG 2.1 AA準拠）",
+      "severity": "error"
+    }
+  ]
+}
